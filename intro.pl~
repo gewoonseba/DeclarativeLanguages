@@ -16,7 +16,7 @@ sibling(X,Y):-
         X \== Y.
 
 ancestor(X,Y):-
-        father(Z,Y),
-        ancestor(X,Z).
+        ancestor(X,Z),
+        father(Z,Y).
 
 ancestor(X,Y):- father(X,Y).
