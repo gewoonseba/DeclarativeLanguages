@@ -1,0 +1,27 @@
+%Prolog: N-queens problem.
+
+generate(N,L):-
+        findall(X,between(1,N,X),L).
+
+permutate([],[]).
+permutate(L,[El|P]):-
+        select(El,L,L2),
+        permutate(L2,P).
+
+safe([]).
+safe([Q|Qs]):-
+        safe_diag(Q,Qs),
+        safe(Qs).
+
+safe_diag(Q,Qs):- safe_diag(Q,Qs,1).
+safe_diag(_,[],_).
+safe_diag(Q,[Nq|Qs],Ind):-
+        Q =\= Nq - Ind,
+        Q =\= Nq + Ind,
+        NInd is Ind + 1,
+        safe_diag(Q,Qs,NInd).            
+
+queens(N,Res):-
+        generate(N,L),
+        permutate(L,Res),
+        safe(Res).
